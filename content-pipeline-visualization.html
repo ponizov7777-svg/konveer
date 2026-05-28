@@ -1,0 +1,687 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Конвейер инфографики: визуализация проекта</title>
+  <style>
+    :root {
+      --bg: #f6f3ee;
+      --surface: #ffffff;
+      --surface-alt: #efe9df;
+      --text: #241f1a;
+      --muted: #6d6258;
+      --line: #d9cec0;
+      --accent: #9a5b2f;
+      --accent-dark: #704020;
+      --success: #4c7a54;
+      --warning: #b17b25;
+      --radius: 22px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, "Segoe UI", Arial, sans-serif;
+      line-height: 1.5;
+    }
+
+    .page {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 40px 0 56px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.25fr 0.75fr;
+      gap: 24px;
+      align-items: stretch;
+      margin-bottom: 28px;
+    }
+
+    .hero-main,
+    .hero-side,
+    .card,
+    .stage,
+    .service {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+    }
+
+    .hero-main {
+      padding: 34px;
+    }
+
+    .eyebrow {
+      margin: 0 0 12px;
+      color: var(--accent-dark);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin-top: 0;
+    }
+
+    h1 {
+      max-width: 740px;
+      margin-bottom: 18px;
+      font-size: clamp(34px, 5vw, 58px);
+      line-height: 1.03;
+      letter-spacing: -0.05em;
+    }
+
+    h2 {
+      margin-bottom: 18px;
+      font-size: 28px;
+      line-height: 1.12;
+      letter-spacing: -0.03em;
+    }
+
+    h3 {
+      margin-bottom: 8px;
+      font-size: 18px;
+      line-height: 1.2;
+    }
+
+    .lead {
+      max-width: 760px;
+      margin-bottom: 24px;
+      color: var(--muted);
+      font-size: 18px;
+    }
+
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 7px 12px;
+      background: var(--surface-alt);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--accent-dark);
+      font-size: 14px;
+      font-weight: 650;
+    }
+
+    .hero-side {
+      display: grid;
+      align-content: center;
+      padding: 28px;
+      background: var(--text);
+      color: var(--surface);
+    }
+
+    .hero-side p {
+      color: #e9dfd2;
+    }
+
+    .metric {
+      display: grid;
+      gap: 4px;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+    }
+
+    .metric:last-child {
+      border-bottom: 0;
+    }
+
+    .metric strong {
+      font-size: 28px;
+      line-height: 1;
+    }
+
+    .metric span {
+      color: #d4c7ba;
+      font-size: 14px;
+    }
+
+    .section {
+      margin-top: 28px;
+    }
+
+    .task-section {
+      margin-top: 34px;
+    }
+
+    .task-label {
+      display: inline-flex;
+      margin-bottom: 10px;
+      padding: 7px 12px;
+      border-radius: 999px;
+      background: var(--text);
+      color: var(--surface);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .task-divider {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 18px;
+      align-items: center;
+      margin: 42px 0 14px;
+      color: var(--accent-dark);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .task-divider::before,
+    .task-divider::after {
+      content: "";
+      height: 1px;
+      background: var(--line);
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      align-items: end;
+      margin-bottom: 16px;
+    }
+
+    .section-head p {
+      max-width: 540px;
+      margin-bottom: 0;
+      color: var(--muted);
+    }
+
+    .section-head.subhead {
+      margin-top: 22px;
+    }
+
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .stage {
+      position: relative;
+      min-height: 194px;
+      padding: 20px;
+    }
+
+    .stage:not(:last-child)::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      right: -17px;
+      width: 20px;
+      height: 2px;
+      background: var(--accent);
+    }
+
+    .stage-number {
+      display: inline-grid;
+      place-items: center;
+      width: 34px;
+      height: 34px;
+      margin-bottom: 16px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #fff;
+      font-weight: 800;
+    }
+
+    .stage p,
+    .service p,
+    .card p {
+      margin-bottom: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .card {
+      padding: 24px;
+    }
+
+    .card.accent {
+      background: var(--surface-alt);
+    }
+
+    .list {
+      display: grid;
+      gap: 10px;
+      margin: 16px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .list li {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .list li::before {
+      content: "";
+      flex: 0 0 auto;
+      width: 8px;
+      height: 8px;
+      margin-top: 7px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+    .services {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .service {
+      padding: 18px;
+    }
+
+    .image-card {
+      overflow: hidden;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+    }
+
+    .image-card img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .image-caption {
+      padding: 16px 20px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .service small {
+      display: inline-block;
+      margin-bottom: 12px;
+      color: var(--accent-dark);
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .architecture {
+      display: grid;
+      grid-template-columns: 0.85fr 1.3fr 0.85fr;
+      gap: 16px;
+      align-items: center;
+    }
+
+    .arch-column {
+      display: grid;
+      gap: 12px;
+    }
+
+    .arch-box {
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: var(--surface);
+    }
+
+    .arch-box strong {
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .arch-box span {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .engine {
+      padding: 26px;
+      border: 2px solid var(--accent);
+      border-radius: 26px;
+      background: var(--surface-alt);
+      text-align: center;
+    }
+
+    .engine h3 {
+      margin-bottom: 12px;
+      font-size: 24px;
+    }
+
+    .engine-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .engine-pill {
+      padding: 10px;
+      border-radius: 14px;
+      background: var(--surface);
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 650;
+    }
+
+    .highlight {
+      color: var(--accent-dark);
+      font-weight: 800;
+    }
+
+    .footer-note {
+      margin-top: 28px;
+      padding: 18px 22px;
+      border-left: 5px solid var(--accent);
+      background: var(--surface);
+      border-radius: 0 18px 18px 0;
+      color: var(--muted);
+    }
+
+    @media (max-width: 980px) {
+      .hero,
+      .split,
+      .architecture {
+        grid-template-columns: 1fr;
+      }
+
+      .flow,
+      .services {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .stage:not(:last-child)::after {
+        display: none;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .page {
+        width: min(100% - 20px, 1180px);
+        padding-top: 20px;
+      }
+
+      .hero-main,
+      .hero-side,
+      .card {
+        padding: 22px;
+      }
+
+      .flow,
+      .services,
+      .engine-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .section-head {
+        display: block;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="hero">
+      <div class="hero-main">
+        <p class="eyebrow">AI-конвейер контента</p>
+        <h1>Система для пакетной переработки и создания инфографики без дизайнера</h1>
+        <p class="lead">Проект объединяет анализ старой инфографики, брендбук, AI-генерацию текстов и шаблонный рендеринг, чтобы стабильно выпускать новую инфографику в нужных форматах.</p>
+        <div class="hero-tags">
+          <span class="tag">Пакетная обработка</span>
+          <span class="tag">Брендбук</span>
+          <span class="tag">Шаблоны</span>
+          <span class="tag">Telegram-бот или веб-форма</span>
+          <span class="tag">Контроль качества</span>
+        </div>
+      </div>
+
+      <aside class="hero-side">
+        <p class="eyebrow">MVP-цель</p>
+        <div class="metric">
+          <strong>5-10</strong>
+          <span>тестовых инфографик для первой проверки качества</span>
+        </div>
+        <div class="metric">
+          <strong>1</strong>
+          <span>единый процесс: загрузка, генерация, проверка, выгрузка</span>
+        </div>
+        <div class="metric">
+          <strong>2</strong>
+          <span>режима работы: обновить старую инфографику или создать новую</span>
+        </div>
+      </aside>
+    </section>
+
+    <section class="section task-section">
+      <div class="section-head">
+        <div>
+          <span class="task-label">Задача 1</span>
+          <h2>Переработка старой инфографики</h2>
+        </div>
+        <p>Подходит, если у клиента уже есть архив инфографики, но дизайн устарел или не соответствует новому брендбуку.</p>
+      </div>
+
+      <article class="card accent">
+        <h3>Что делаем в рамках задачи</h3>
+        <ul class="list">
+          <li>Разбираем существующие типы инфографики и смысловые блоки.</li>
+          <li>Собираем правила нового визуального стиля по брендбуку.</li>
+          <li>Настраиваем пакетную обработку папки с исходниками.</li>
+          <li>Добавляем ручное утверждение спорных результатов.</li>
+        </ul>
+      </article>
+
+      <div class="section-head subhead">
+        <h2>Как работает конвейер обновления</h2>
+        <p>Пользователь загружает старые материалы, n8n запускает сценарий, AI извлекает смысл, а шаблонный рендер собирает новую инфографику.</p>
+      </div>
+
+      <div class="flow">
+        <article class="stage">
+          <span class="stage-number">1</span>
+          <h3>Входные данные</h3>
+          <p>Старая инфографика, материалы, факты, тексты, изображения, брендбук и требования к формату.</p>
+        </article>
+        <article class="stage">
+          <span class="stage-number">2</span>
+          <h3>Анализ</h3>
+          <p>OCR и AI извлекают текст, смысловые блоки, структуру инфографики и важные ограничения.</p>
+        </article>
+        <article class="stage">
+          <span class="stage-number">3</span>
+          <h3>Сценарий</h3>
+          <p>Система выбирает тип инфографики: процесс, сравнение, инструкция, преимущества, статистика или презентационный блок.</p>
+        </article>
+        <article class="stage">
+          <span class="stage-number">4</span>
+          <h3>Рендеринг</h3>
+          <p>HTML/SVG/Figma-шаблон собирает новую инфографику с нужными цветами, шрифтами и композицией.</p>
+        </article>
+        <article class="stage">
+          <span class="stage-number">5</span>
+          <h3>Результат</h3>
+          <p>Готовая инфографика сохраняется в папку, а клиент получает статус и ссылку на выгрузку.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <h2>Визуализация процесса через n8n</h2>
+        <p>Так может выглядеть первый MVP: n8n оркестрирует сценарий, а AI, шаблоны и хранилище выполняют отдельные этапы обработки.</p>
+      </div>
+
+      <figure class="image-card">
+        <img src="assets/n8n-infographics-refresh-pipeline.png" alt="Схема n8n-конвейера для обновления инфографики">
+        <figcaption class="image-caption">Схема показывает путь от загрузки старой инфографики до обновленного результата и Telegram-уведомления клиенту.</figcaption>
+      </figure>
+    </section>
+
+    <div class="task-divider">Переход ко второй задаче</div>
+
+    <section class="section task-section">
+      <div class="section-head">
+        <div>
+          <span class="task-label">Задача 2</span>
+          <h2>Создание инфографики без дизайнера через n8n</h2>
+        </div>
+        <p>Подходит, если нужно регулярно выпускать новую инфографику по брифу, материалам и заранее подготовленным шаблонам.</p>
+      </div>
+
+      <article class="card">
+        <h3>Что делаем в рамках задачи</h3>
+        <ul class="list">
+          <li>Делаем форму, таблицу или Telegram-бот для постановки задач.</li>
+          <li>Настраиваем генерацию коротких текстов и структуры инфографики.</li>
+          <li>Создаем библиотеку шаблонов под разные сценарии.</li>
+          <li>Выгружаем результат в нужных форматах для сайта, презентаций, соцсетей или внутренних материалов.</li>
+        </ul>
+      </article>
+
+      <div class="section-head subhead">
+        <h2>Визуализация создания без дизайнера через n8n</h2>
+        <p>n8n принимает бриф из формы или Telegram, управляет AI-запросами, выбирает шаблоны, запускает рендер и возвращает готовую инфографику.</p>
+      </div>
+
+      <figure class="image-card">
+        <img src="assets/n8n-no-designer-infographics-workflow.png" alt="Схема системы создания инфографики без дизайнера через n8n">
+        <figcaption class="image-caption">Схема показывает, как n8n становится центром процесса: принимает бриф, вызывает AI, работает с шаблонами, запускает рендер и обрабатывает правки через Telegram.</figcaption>
+      </figure>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <h2>Архитектура MVP на n8n</h2>
+        <p>Минимальная версия строится вокруг n8n: он принимает задачу, вызывает AI, выбирает шаблон, запускает рендер и сохраняет результат.</p>
+      </div>
+
+      <div class="architecture">
+        <div class="arch-column">
+          <div class="arch-box">
+            <strong>Telegram-бот / веб-форма</strong>
+            <span>Постановка задачи и загрузка материалов.</span>
+          </div>
+          <div class="arch-box">
+            <strong>Google Drive / S3</strong>
+            <span>Хранение исходников и готовой инфографики.</span>
+          </div>
+          <div class="arch-box">
+            <strong>Google Sheets / Supabase</strong>
+            <span>Статусы, история задач и ссылки на результаты.</span>
+          </div>
+        </div>
+
+        <div class="engine">
+          <p class="eyebrow">Центр системы</p>
+          <h3>n8n-сценарий</h3>
+          <p>Оркестрирует обработку: принимает webhook, ведет статусы, вызывает AI, передает данные в шаблон и отправляет уведомления.</p>
+          <div class="engine-grid">
+            <div class="engine-pill">OCR / Vision</div>
+            <div class="engine-pill">Генерация текста</div>
+            <div class="engine-pill">Выбор шаблона</div>
+            <div class="engine-pill">Проверка качества</div>
+          </div>
+        </div>
+
+        <div class="arch-column">
+          <div class="arch-box">
+            <strong>OpenAI / Gemini</strong>
+            <span>Анализ изображений, извлечение смыслов и генерация текстов.</span>
+          </div>
+          <div class="arch-box">
+            <strong>HTML/SVG/Figma</strong>
+            <span>Стабильная сборка инфографики по брендбуку.</span>
+          </div>
+          <div class="arch-box">
+            <strong>n8n Cloud / VPS / Yandex Cloud</strong>
+            <span>Хостинг n8n, рендер-сервиса и служебных сценариев.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <h2>Сервисы по слоям</h2>
+        <p>Стек можно собрать постепенно: n8n управляет процессом, а AI, шаблоны, хранилище и рендер выполняют отдельные части сценария.</p>
+      </div>
+
+      <div class="services">
+        <article class="service">
+          <small>Интерфейс</small>
+          <h3>Telegram-бот или веб-форма</h3>
+          <p>Клиент загружает файлы, выбирает сценарий и получает готовую инфографику.</p>
+        </article>
+        <article class="service">
+          <small>AI</small>
+          <h3>OpenAI / Gemini</h3>
+          <p>Извлекает текст, переписывает смыслы, помогает выбрать шаблон и проверяет результат.</p>
+        </article>
+        <article class="service">
+          <small>Файлы</small>
+          <h3>S3 / Drive / Яндекс Диск</h3>
+          <p>Хранит исходники, промежуточные файлы и финальные изображения.</p>
+        </article>
+        <article class="service">
+          <small>Оркестратор</small>
+          <h3>n8n self-hosted / n8n Cloud</h3>
+          <p>Связывает загрузку, AI, шаблоны, рендеринг, статусы, правки и уведомления.</p>
+        </article>
+        <article class="service">
+          <small>Шаблоны</small>
+          <h3>HTML/CSS или SVG</h3>
+          <p>Дают стабильность: одинаковая сетка, размеры, шрифты и брендовые правила.</p>
+        </article>
+        <article class="service">
+          <small>Данные</small>
+          <h3>PostgreSQL / Supabase</h3>
+          <p>Сохраняет проекты, версии, промпты, статусы обработки и историю правок.</p>
+        </article>
+        <article class="service">
+          <small>Надежность</small>
+          <h3>Ретраи и очереди n8n</h3>
+          <p>Для MVP достаточно сценариев n8n; отдельная очередь нужна только при большой нагрузке.</p>
+        </article>
+        <article class="service">
+          <small>Хостинг</small>
+          <h3>n8n Cloud / VPS / Selectel</h3>
+          <p>Размещает n8n, рендер-сервис, доступы к хранилищу и служебные сценарии.</p>
+        </article>
+      </div>
+    </section>
+
+    <div class="footer-note">
+      <strong class="highlight">Рекомендуемый старт:</strong> не строить сразу большой продукт, а взять брендбук и 5-10 старых инфографик, собрать тестовый конвейер.
+    </div>
+  </main>
+</body>
+</html>
